@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+import re
+
 import simplejson as json
 
 from flask import Flask
@@ -28,9 +30,12 @@ def searchroot():
 
 @app.route("/v2/message/<msgid>")
 def messagev2(msgid):
+    fmsg1 = db.find_message(msgid).get_filename()
+    ticket = re.sub('/u/snot/etc/fss/.*/', '', fmsg1);
     msg = db.find_message(msgid).format_message_as_text()
     ppmsg = msg.split('\n')
-    return render_template('msg.html', msg=ppmsg)
+    #return render_template('msg.html', msg=ppmsg, ticket=ticket)
+    return render_template('msg.html', ticket=ticket)
 
 
 @app.route("/search/<term>")
