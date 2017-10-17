@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import notmuch
+
 import datetime
 
 import re
@@ -13,7 +15,6 @@ from flask import redirect, url_for
 
 app = Flask(__name__)
 
-import notmuch
 
 db = notmuch.Database()
 
@@ -81,12 +82,18 @@ def searchv3():
     for i in list(query.search_messages()):
         msg = {}
         msg['id'] = i.get_message_id()
-        msg['subject'] = i.get_header('subject')
+
+	try:
+	  msg['subject'] = i.get_header('subject')
+	except:
+	  msg['subject'] = ''
+
         try:
           msg['summary'] = str(i).encode('ascii')
         except UnicodeDecodeError:
           print i
           msg['summary'] = 'unable to get summary'
+
         msgs.append(msg)
 
 

@@ -12,7 +12,7 @@
   <tbody class="searchable">
     {% for msg in msgs %}
     <tr>
-      <td style="word-wrap:break-word"><a href="/~snot/fss/index.cgi/v2/message/{{msg.id}}">{{msg.subject}}</a></td>
+      <td style="word-wrap:break-word"><a href="/fss/v2/message/{{msg.id}}">{{msg.subject}}</a></td>
       <td style="word-wrap:break-word">{{msg.summary}}</td>
     </tr>
     {% endfor %}
@@ -21,7 +21,7 @@
 {%- endmacro %}
 {% macro search_box() -%}
 <div class="filter" style="margin-bottom:{{margin_bottom}}px;margin-top:{{margin_top}}px;">
-<form action="/~snot/fss/index.cgi/v3/search/snot" method="get">
+<form action="/fss/v3/search/snot" method="get">
   <input autofocus="autofocus" name="term" style="width:100%" type="text" class="input-medium search-query" placeholder="Type here to search">
 </form>
 </div>
